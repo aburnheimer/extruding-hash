@@ -14,6 +14,7 @@
 # Copyright:: Copyright (c) 2012
 # License::   Creative Commons 3.0 License.  Details can be found in the
 #             file LICENSE.
+require File.expand_path File.join(File.dirname(__FILE__), 'array')
 
 class ExtrudingHash < Hash
 
@@ -27,6 +28,16 @@ class ExtrudingHash < Hash
   # structure, and add nil values to any existing columns that haven't
   # included the _bins_ of the newly passed-in column.
   def <<( right )
+    right.each do |key, value|
+      if self[key].nil?
+        self[key] = Array.new
+        self.normalize!
+        self[key].last = value
+      else
+        self[key] << value
+      end
+    end
+
     return right
   end
 
