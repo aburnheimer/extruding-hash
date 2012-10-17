@@ -1,15 +1,16 @@
 require File.expand_path File.join(File.dirname(__FILE__), '../lib/extruding-hash/extruding_hash')
 
-describe ExtrudingHash, "#<<" do
-
+describe ExtrudingHash, "#columns" do
   it "returns the number of columns contained" do
     test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3, 5 ],
         "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] } )
 
     test_value.columns.should eq(4)
   end
+end
 
-  it "can normalize itself such that all bins' value-arrays are as wide as the widest" do
+describe ExtrudingHash, "#normalize!" do
+  it "can modify itself such that all bins' value-arrays are as wide as the widest" do
     test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3 ],
         "a3|b3" => [ 2, 3, 5, 8 ] } )
     test_value.normalize!
@@ -18,7 +19,9 @@ describe ExtrudingHash, "#<<" do
 
     test_value.should eq(expected_value)
   end
+end
 
+describe ExtrudingHash, "#<<" do
   it "adds a column where all bins correspond" do
     test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3, 5 ],
         "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] } )
@@ -43,5 +46,4 @@ describe ExtrudingHash, "#<<" do
 
     test_value.should eq(expected_value)
   end
-
 end
