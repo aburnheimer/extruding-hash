@@ -54,12 +54,11 @@ Usage
 -----
 ```ruby
 require 'extruding-hash'
-data = ExtrudingHash.new
-data = { "a1|b1" => [ 1, 2, 3, 5 ], "a3|b3" => [ 2, 3, 5, 8 ],
-         "a4|b4" => [ 3, 5, 8, 13 ] }
+data = ExtrudingHash.new.set_from_hash({ "a1|b1" => [ 1, 2, 3, 5 ],
+    "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] })
 data << { "a1|b1" => 21, "a2|b2" => 34, "a4|b4" => 55 }
 data
-=> {"a1|b1"=>[1, 2, 3, 5, 21], "a2|b2"=>[nil, nil, nil, 34],
+=> {"a1|b1"=>[1, 2, 3, 5, 21], "a2|b2"=>[nil, nil, nil, nil, 34],
     "a3|b3"=>[2, 3, 5, 8, nil], "a4|b4"=>[ 3, 5, 8, 13, 55]}
 ```
 
