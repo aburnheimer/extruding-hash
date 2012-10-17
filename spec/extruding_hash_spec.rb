@@ -2,7 +2,14 @@ require File.expand_path File.join(File.dirname(__FILE__), '../lib/extruding-has
 
 describe ExtrudingHash, "#<<" do
 
-  it "Adds a column where all bins correspond" do
+  it "returns the number of columns contained" do
+    test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3, 5 ],
+        "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] } )
+
+    test_value.columns.should eq(4)
+  end
+
+  it "adds a column where all bins correspond" do
     test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3, 5 ],
         "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] } )
 
@@ -14,7 +21,7 @@ describe ExtrudingHash, "#<<" do
     test_value.should eq(expected_value)
   end
 
-  it "Adds a column where all bins do not correspond" do
+  it "adds a column where all bins do not correspond" do
     test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3, 5 ],
         "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] } )
 
