@@ -30,7 +30,7 @@ class ExtrudingHash < Hash
     return right
   end
 
-  # The (largest) number of columns in all _bins_ of the Hash.
+  # The (largest) number of columns among all _bins_ of the Hash.
   def columns
     ret = -1
     self.each do |key, value|
@@ -42,6 +42,17 @@ class ExtrudingHash < Hash
     else
       ret
     end
+  end
+
+  # Grow any extent short rows to the same width as the longest
+  def normalize!
+    max = self.columns
+
+    self.each do |key, value|
+      value << nil while value.count < max
+    end
+
+    max
   end
 
 end

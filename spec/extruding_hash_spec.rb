@@ -9,6 +9,16 @@ describe ExtrudingHash, "#<<" do
     test_value.columns.should eq(4)
   end
 
+  it "can normalize itself such that all bins' value-arrays are as wide as the widest" do
+    test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3 ],
+        "a3|b3" => [ 2, 3, 5, 8 ] } )
+    test_value.normalize!
+
+    expected_value = { "a1|b1" => [ 1, 2, 3, nil], "a3|b3" => [ 2, 3, 5, 8 ] }
+
+    test_value.should eq(expected_value)
+  end
+
   it "adds a column where all bins correspond" do
     test_value = ExtrudingHash.new.set_from_hash( { "a1|b1" => [ 1, 2, 3, 5 ],
         "a3|b3" => [ 2, 3, 5, 8 ], "a4|b4" => [ 3, 5, 8, 13 ] } )
