@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'extruding-hash'
-  s.version     = '0.9.0'
+  s.version     = '0.9.1'
   s.summary     = %q{Hash structure for histograms}
 
   s.description = %q{Data structure, based on a Hash of Arrays, that

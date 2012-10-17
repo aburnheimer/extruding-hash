@@ -28,15 +28,17 @@ class ExtrudingHash < Hash
   # structure, and add nil values to any existing columns that haven't
   # included the _bins_ of the newly passed-in column.
   def <<( right )
-    right.each_key do |key|
-      self[key] = Array.new if self[key].nil?
-    end
-    self.normalize!
+    unless right.nil?
+      right.each_key do |key|
+        self[key] = Array.new if self[key].nil?
+      end
+      self.normalize!
 
-    right.each do |key, value|
-      self[key] << value
+      right.each do |key, value|
+        self[key] << value
+      end
+      self.normalize!
     end
-    self.normalize!
 
     return self
   end
